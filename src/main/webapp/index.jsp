@@ -1,5 +1,5 @@
 
 
 <html>  
-<h1> WELCOME TO MIND CIRCUIT ; WE JUST DONT TRAIN ; WE MENTOR ,COACH & BUILD PEOPLE....</h1> 
+<h1>n NEW CODE </h1> 
 </html>
