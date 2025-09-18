@@ -13,17 +13,36 @@ pipeline {
         stage('Build Artifact') {
             steps {
                 echo 'This stage builds the code using maven'
-				sh 'mvn clean install'			
+				sh 'mvn clean install'
 				
             }
         }
-		
-        stage('Deploy to Tomcat') {
-            steps {
-                echo 'This stage deploys .war to tomcat webserver'
-                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://44.223.26.72:8090/')], contextPath: 'MC-APP', war: '**/*.war'
+
+            stage('Deploy to Multiple Environments') {
+            parallel {
+                stage('Lab') {
+                    steps {
+                        echo 'DEPLOYING ON LAB...'
+                       // deploying on LAB TOMCAT WEB SERVER 
+                   }
+                }
+                stage('sbox') {
+                    steps {
+                        echo 'DEPLOYING ON sbox...'
+                       // deploying on SBOX  TOMCAT WEB SERVER 
+                   }
+                    }
+                
+                stage('UAT') {
+                    steps {
+                        echo 'DEPLOYING ON UAT...'
+                      // deploying on UAT  TOMCAT WEB SERVER 
+                   }
+                    }
+                }
             }
-        }		
-		
+
+        }
     }
-}
+   
+
